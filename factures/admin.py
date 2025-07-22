@@ -30,4 +30,4 @@ class CommandeAdmin(admin.ModelAdmin):
 
 @admin.register(CommandeProduit)
 class CommandeProduitAdmin(admin.ModelAdmin):
-    search_fields = ['commande__title','produit__title','quantity'] # Permet de chercher par titre (commande produit) et quantite
+    search_fields = ['commande__title','produit__title','quantity'] # Permet de chercher par titre (commande, produit) et quantite
