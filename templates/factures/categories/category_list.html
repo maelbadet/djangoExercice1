@@ -1,0 +1,42 @@
+{% extends "factures/base.html" %}
+
+{% block title %}Liste des catégories{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Liste des catégories</h1>
+    <a href="{% url 'categorie_create' %}" class="btn btn-primary">Créer une catégorie</a>
+  </div>
+
+  {% if object_list %}
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>Titre</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for categorie in object_list %}
+            <tr>
+              <td>
+                <a href="{% url 'categorie_detail' categorie.pk %}" class="text-decoration-none">
+                  {{ categorie.title }}
+                </a>
+              </td>
+              <td>
+                <a href="{% url 'categorie_update' categorie.pk %}" class="btn btn-sm btn-outline-secondary me-2">Modifier</a>
+                <a href="{% url 'categorie_delete' categorie.pk %}" class="btn btn-sm btn-outline-danger">Supprimer</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-info mt-3">Aucune catégorie disponible pour le moment.</div>
+  {% endif %}
+</div>
+{% endblock %}

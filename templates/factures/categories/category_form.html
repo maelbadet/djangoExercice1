@@ -1,0 +1,36 @@
+{% extends "factures/base.html" %}
+
+{% block title %}
+    {% if object %}
+        Modifier une catégorie
+    {% else %}
+        Nouvelle catégorie
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">
+                    {% if object %}
+                        Modifier une catégorie
+                    {% else %}
+                        Nouvelle catégorie
+                    {% endif %}
+                </h3>
+            </div>
+            <div class="card-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% load bootstrap5 %}
+                    {% bootstrap_form form %}
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-success">Valider</button>
+                        <a href="{% url 'categorie_list' %}" class="btn btn-secondary">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

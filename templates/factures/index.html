@@ -1,0 +1,17 @@
+{% extends "factures/base.html" %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="text-center">
+    <h1 class="mb-4">Bienvenue dans le système de facturation</h1>
+    <div class="d-grid gap-3 col-6 mx-auto">
+      <a href="{% url 'produit_list' %}" class="btn btn-outline-primary btn-lg">Produits</a>
+      <a href="{% url 'categorie_list' %}" class="btn btn-outline-secondary btn-lg">Catégories</a>
+      <a href="{% url 'commande_list' %}" class="btn btn-outline-success btn-lg">Commandes</a>
+      <a href="{% url 'facture_list' %}" class="btn btn-outline-info btn-lg">Factures</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "factures/base.html" %}
+{% load bootstrap5 %}
+
+{% block title %}
+    {% if object %}
+        Modifier une commande
+    {% else %}
+        Nouvelle commande
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">
+                    {% if object %}
+                        Modifier une commande
+                    {% else %}
+                        Nouvelle commande
+                    {% endif %}
+                </h3>
+            </div>
+            <div class="card-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {{ formset.management_form }}
+                    {% for form in formset %}
+                        <div class="border p-3 mb-3">
+                            {% bootstrap_form form %}
+                        </div>
+                    {% endfor %}
+
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-success">Valider</button>
+                        <a href="{% url 'commande_list' %}" class="btn btn-secondary">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "factures/base.html" %}
+{% block title %}Facture {{ object.title }}{% endblock %}
+{% block content %}
+<div class="container mt-4">
+  <h1>Facture : {{ object.title }}</h1>
+  <p>{{ object.description }}</p>
+  <p>Client : {{ object.client }}</p>
+
+  <hr>
+  <h2>Commandes associées</h2>
+
+  {% for detail in commandes_details %}
+    <div class="card mb-3">
+      <div class="card-header bg-secondary text-white">
+        Commande : <a href="{% url 'commande_detail' detail.commande.pk %}">{{ detail.commande.title }}</a>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Produit</th>
+              <th>Prix HT (€)</th>
+              <th>TVA (%)</th>
+              <th>Prix TTC (€)</th>
+              <th>Quantité</th>
+              <th>Total HT (€)</th>
+              <th>Total TTC (€)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for ligne in detail.produits %}
+              <tr>
+                <td><a href="{% url 'produit_detail' ligne.produit.pk %}">{{ ligne.produit.title }}</a></td>
+                <td>{{ ligne.prix_ht|floatformat:2 }}</td>
+                <td>{{ ligne.tva|floatformat:2 }}</td>
+                <td>{{ ligne.prix_ttc|floatformat:2 }}</td>
+                <td>{{ ligne.quantite }}</td>
+                <td>{{ ligne.ligne_ht|floatformat:2 }}</td>
+                <td>{{ ligne.ligne_ttc|floatformat:2 }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <p><strong>Total HT commande : </strong>{{ detail.total_ht_commande|floatformat:2 }} €</p>
+        <p><strong>Total TTC commande : </strong>{{ detail.total_ttc_commande|floatformat:2 }} €</p>
+      </div>
+    </div>
+  {% endfor %}
+
+  <hr>
+  <h3>Récapitulatif Facture</h3>
+  <p><strong>Total HT facture :</strong> {{ total_ht_facture|floatformat:2 }} €</p>
+  <p><strong>Total TTC facture :</strong> {{ total_ttc_facture|floatformat:2 }} €</p>
+  <p><strong>TVA totale :</strong> {{ total_tva_facture|floatformat:2 }} €</p>
+</div>
+{% endblock %}

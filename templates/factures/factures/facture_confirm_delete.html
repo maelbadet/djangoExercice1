@@ -1,0 +1,17 @@
+{% extends "factures/base.html" %}
+
+{% block title %}Supprimer {{ object.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="alert alert-danger shadow-sm text-center" role="alert">
+    <h4 class="alert-heading">Supprimer « {{ object.title }} » ?</h4>
+    <p>Cette action est irréversible.</p>
+    <form method="post" class="mt-4">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger me-2">Confirmer la suppression</button>
+      <a href="javascript:history.back()" class="btn btn-secondary">Annuler</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

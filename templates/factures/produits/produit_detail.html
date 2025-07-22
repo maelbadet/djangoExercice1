@@ -1,0 +1,19 @@
+{% extends "factures/base.html" %}
+
+{% block title %}Détail du produit{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">{{ object.title }}</h3>
+    </div>
+    <div class="card-body">
+      <p class="mb-2"><strong>Description :</strong> {{ object.description }}</p>
+      <p class="mb-2"><strong>Prix HT :</strong> {{ object.price }} €</p>
+      <p class="mb-2"><strong>TVA :</strong> {{ object.tva }}%</p>
+      <p class="mb-0"><strong>Quantité disponible :</strong> {{ object.quantity }}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

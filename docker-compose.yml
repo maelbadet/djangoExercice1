@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:11
+    container_name: mariadb_django
+    restart: always
+    environment:
+      MARIADB_DATABASE: ${DJANGO_DATABASE}
+      MARIADB_USER: ${DJANGO_USER}
+      MARIADB_PASSWORD: ${DJANGO_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DJANGO_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+volumes:
+  mariadb_data:

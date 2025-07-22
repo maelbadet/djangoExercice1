@@ -1,0 +1,59 @@
+{% extends "factures/base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-3">{{ object.title }}</h1>
+  <p class="text-muted">{{ object.description }}</p>
+
+  <h2 class="mt-5">Produits commandés :</h2>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Produit</th>
+          <th>Prix HT</th>
+          <th>TVA (%)</th>
+          <th>Prix TTC</th>
+          <th>Quantité</th>
+          <th>Total HT</th>
+          <th>Total TTC</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ligne in lignes %}
+        <tr>
+          <td>
+            <a href="{% url 'produit_detail' ligne.produit.pk %}" class="text-decoration-none">
+              {{ ligne.produit.title }}
+            </a>
+          </td>
+          <td>{{ ligne.prix_ht }} €</td>
+          <td>{{ ligne.produit.tva }}</td>
+          <td>{{ ligne.prix_ttc }} €</td>
+          <td>{{ ligne.quantite }}</td>
+          <td>{{ ligne.ligne_ht }} €</td>
+          <td>{{ ligne.ligne_ttc }} €</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot class="table-light">
+        <tr>
+          <th colspan="5" class="text-end">Total HT :</th>
+          <th>{{ total_ht }} €</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th colspan="5" class="text-end">TVA totale :</th>
+          <th>{{ difference }} €</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th colspan="5" class="text-end">Total TTC :</th>
+          <th>{{ total_ttc }} €</th>
+          <th></th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+{% endblock %}
